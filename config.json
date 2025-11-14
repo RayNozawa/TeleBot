@@ -1,0 +1,15 @@
+{
+  "botname": "Jinan Safa",
+  "wm": "Developed by @RayhanXD",
+  "owner": "RayhanXD",
+  "OWNER_ID": 5600234846,
+  "database": "database",
+  "evaluate_chars": ["=>", "~>", "<", ">", "$"],
+  "setting": {
+    "multiprefix": true,
+    "prefix": [".", "#", "!", "/"],
+    "onlyprefix": "."
+  },
+  "limit": 15,
+  "expgame": 1000
+}
