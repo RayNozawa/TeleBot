@@ -1,6 +1,6 @@
 # Telegram BOT
 
-**Forty-Eight** adalah bot Telegram modular berbasis **Node.js** yang dibangun menggunakan library [`node-telegram-bot-api`](https://github.com/yagop/node-telegram-bot-api). Bot ini dirancang dengan sistem plugin yang fleksibel, penyimpanan data lokal sederhana, menu interaktif berdasarkan kategori, dan manajemen event yang terstruktur.
+**Forty-Eight** adalah bot Telegram modular berbasis **Node.js** yang dibangun menggunakan library [`node-telegram-bot-api`](https://github.com/yagop/node-telegram-bot-api). Bot ini dirancang dengan sistem plugin yang fleksibel, penyimpanan data lokal sederhana, menu interaktif berdasarkan kategori, dan manajemen event yang terstruktur, preview? [Chat BOT](https://t.me/jinansafa_bot)
 
 ---
 
