@@ -6,6 +6,7 @@
 
 ### Script ini berbayar (5K perbulan)
 - **Enkripsi standar main.js & handler.js**
+- ***Beli key hubungi [@RayhanXD](https://t.me/RayhanXD)***
 
 ## ✨ Fitur Utama
 
