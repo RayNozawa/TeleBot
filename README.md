@@ -4,6 +4,9 @@
 
 ---
 
+### Script ini berbayar (5K perbulan)
+- **Enkripsi standar main.js & handler.js**
+
 ## ✨ Fitur Utama
 
 - **Sistem Plugin Dinamis** — Tambah atau ubah fitur tanpa menyentuh inti bot.
