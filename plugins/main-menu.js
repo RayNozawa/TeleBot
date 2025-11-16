@@ -110,10 +110,10 @@ export const run = {
       print += `I can help you with various tasks.</code></pre>\n\n`;
       
       let owner
-      if (bot?.owner) {
-        owner = `@${bot?.owner}`;
-      } else if (bot?.owner_id) {
+      if (bot?.owner_id) {
         owner = await getName(bot?.owner_id);
+      } else if (bot?.owner) {
+        owner = `@${bot?.owner}`;
       } else {
         owner = `Not Set`;
       }
