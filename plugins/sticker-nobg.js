@@ -6,7 +6,7 @@ export const run = {
    usage: ['snobg'],
    hidden: ['s.nobg'],
    use: "image",
-   category: 'maker',
+   category: 'sticker',
    async: async (m, {
       conn,
       text,
