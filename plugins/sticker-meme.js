@@ -3,7 +3,7 @@ import axios from "axios"
 
 export const run = {
    usage: ['smeme','smemebawah'],
-   category: 'maker',
+   category: 'sticker',
    use: 'text',
    async: async (m, {
       conn,
