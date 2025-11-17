@@ -5,7 +5,7 @@ import axios from "axios"
 export const run = {
    usage: ['emojimix'],
    category: 'sticker',
-   use: 'emoji',
+   use: 'emoji+emoji',
    async: async (m, {
       conn,
       text,
