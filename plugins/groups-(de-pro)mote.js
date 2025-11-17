@@ -27,6 +27,7 @@ export const run = {
           can_restrict_members: true,
           can_promote_members: false,
         });
+        m.reply(`Berhasil promote ${await getName(m.quoted.sender)}`
       } else if (command == "demote") {
         if (!m.quoted) return m.reply("Reply pesan member yang mau di unadmin!")
         await conn.promoteChatMember(m.chat, m.quoted.sender, {
@@ -38,6 +39,7 @@ export const run = {
           can_restrict_members: false,
           can_promote_members: false,
         });
+        m.reply(`Berhasil demote ${await getName(m.quoted.sender)}`
       }
     } catch (e) {
       return m.reply(`Kemungkinan bot tidak punya izin!\n\n${e.message}`)
