@@ -14,16 +14,13 @@ export const run = {
       Func,
       env
    }) => {
-   
-  let q = m.quoted ? m.quoted : m
+  let q = m.quoted ? m.quoted : m;
+  let mime = q.type;
+  if (!/photo/g.test(mime)) return m.reply(`Reply Gambar Dengan Perintah\n\n${isPrefix + command}`)
 
-  const buffer = await q.download?.();
-
-  if (!buffer) return m.reply('Kirim/reply gambar yang mau diubah!');
-  
   conn.sendChatAction(m.chat, 'upload_photo')
   try {
-    const { url } = await uploadHF(buffer)
+    const url = await conn.getFileLink(q.msg.photo[q.msg.photo.length - 1].file_id);
     await conn.sendButton(m.chat, donateBtn, `${apiUrl}/toghibli?prompt=Ghibli%20Studio%20style,%20charming%20hand-drawn%20anime-style%20illustration&imgUrl=${url}`, 'pinterest.jpg', "`Successfully generated image!`\n\n*Prompt:* " + prompt, m.msg, env.wm);
   } catch (err) {
     const detail = err.response?.data || err.message;

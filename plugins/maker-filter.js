@@ -24,9 +24,7 @@ Contoh: *${isPrefix + command}* jail
     if (mime == "photo") {
     	try {
 			conn.sendChatAction(m.chat, 'upload_photo')
-			let img = await q.download?.()
-			if (!img) return m.reply('Kirim atau reply foto')
-			let out = (await uploadHF(img)).url
+			const out = await conn.getFileLink(q.msg.photo[q.msg.photo.length - 1].file_id);
             await conn.sendButton(m.chat, donateBtn, `https://some-random-api.com/canvas/overlay/${encodeURIComponent(effect)}?avatar=${out}`, 'filter.jpg', "`Successfully generated image!`\n\n*Filter:* " + text, m.msg, env.wm);
     	} catch (e) {
     		return m.reply('Terjadi kesalahan: ' + e.message)

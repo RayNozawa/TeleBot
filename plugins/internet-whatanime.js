@@ -14,9 +14,9 @@ export const run = {
 	let q = m.quoted ? m.quoted : m;
 	let mime = q.type
 	if (!mime.includes("photo")) return m.reply(`Reply fotonya!`);
-	let img = await q.download();
+
 	conn.sendChatAction(m.chat, 'upload_photo')
-	let { url: upld } = await uploadHF(img)
+	const upld = await conn.getFileLink(q.msg.photo[q.msg.photo.length - 1].file_id);
 	let res = await fetch(
 		`https://api.trace.moe/search?anilistInfo&url=${encodeURIComponent(upld)}`
 	);

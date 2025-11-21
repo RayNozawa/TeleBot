@@ -13,9 +13,8 @@ export const run = {
     if (!/photo/g.test(mime)) return m.reply(`Reply Gambar Dengan Perintah\n\n${isPrefix + command}`)
 
     conn.sendChatAction(m.chat, 'find_location')
-
-    let img = await q.download?.()
-    const { url } = await uploadHF(img)
+    
+    const url = await conn.getFileLink(q.msg.photo[q.msg.photo.length - 1].file_id);
 
     try {
         let res

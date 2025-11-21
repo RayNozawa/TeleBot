@@ -17,11 +17,10 @@ export const run = {
       Scraper
    }) => {
   
-  let q = m.quoted ? m.quoted : m;
-  
-  let buffer = await q.download?.();
-  if (!buffer) return m.reply('Kirim/reply gambar yang mau diubah!');
-  
+  let q = m.quoted ? m.quoted : m
+  let mime = q.type
+  if (!/photo/.test(mime)) return m.reply(`Kirim/reply gambar Dengan caption: ${isPrefix + command}`)
+        
   conn.sendChatAction(m.chat, 'upload_photo')
   
   const mimetype = 'image/jpeg';
@@ -29,7 +28,7 @@ export const run = {
   const filename = Date.now()+ext
 
   try {
-    const { url } = await uploadHF(buffer)
+    const url = await conn.getFileLink(q.msg.photo[q.msg.photo.length - 1].file_id);
     const { data } = await axios.get(`${apiUrl}/removebg?imgUrl=${url}`, { responseType: "arraybuffer" })
     await conn.sendButton(m.chat, donateBtn, data, 'pinterest.jpg', '`Successfully Removing Background!`', m.msg, env.wm);
   } catch (e) {
