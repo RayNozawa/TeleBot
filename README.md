@@ -5,9 +5,9 @@
 ---
 
 ### Script ini berbayar (5K perbulan)
+- ***Free Update & Request Fitur (No 18+)***
 - **Enkripsi standar main.js & handler.js**
 - ***Beli key hubungi [@RayhanXD](https://t.me/RayhanXD)***
-- ***Free Update & Request Fitur***
 - ***25K Permanen***
 
 ## ✨ Fitur Utama
