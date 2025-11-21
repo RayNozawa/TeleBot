@@ -16,8 +16,7 @@ export const run = {
     conn.game = conn.game ? conn.game : {}
     let id = 'asahotak-' + m.chat
     if (id in conn.game) return conn.reply(m.chat, 'Masih ada pertanyaan belum terjawab di chat ini', conn.game[id][0])
-    const { data: src } = await axios.get("https://raw.githubusercontent.com/BochilTeam/database/master/games/asahotak.json")
-    let json = src[Math.floor(Math.random() * src.length)]
+    let { data: json } = await axios.get(`${apiUrl}/asahotak`)
     let caption = `
 📄${json.soal}
 

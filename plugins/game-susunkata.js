@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+import axios from "axios"
 
 let timeout = 180000
 
@@ -18,8 +18,8 @@ export const run = {
     let id = m.chat
     if (id in conn.susunkata) return conn.reply(m.chat, ' *❗Masih Ada Soal Yang Belum Terjawab* ', conn.susunkata[id][0])
 
-    let src = await (await fetch('https://raw.githubusercontent.com/BochilTeam/database/master/games/susunkata.json')).json()
-    let json = src[Math.floor(Math.random() * src.length)]
+    const { data: json } = await axios.get(`${apiUrl}/susunkata`)
+    
     const shuffleString = str => [...str].sort(() => Math.random() - 0.5).join('');
     let kataAcak = shuffleString(json.jawaban)
     const addDashes = str => str.split('').join('-');

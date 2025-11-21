@@ -1,4 +1,5 @@
-import fetch from 'node-fetch'
+import axios from "axios"
+
 let timeout = 120000
 
 export const run = {
@@ -17,8 +18,8 @@ export const run = {
     let id = m.chat
     if (id in conn.tebaktebakan) return conn.reply(m.chat, 'Masih ada soal belum terjawab di chat ini', conn.tebaktebakan[id][0])
 
-    let src = await (await fetch('https://raw.githubusercontent.com/BochilTeam/database/master/games/tebaktebakan.json')).json()
-  let json = src[Math.floor(Math.random() * src.length)]
+    const { data: json } = await axios.get(`${apiUrl}/tebaktebakan`)
+    
   let caption = `
 📄${json.soal}
 🕑Timeout *${(timeout / 1000).toFixed(2)} detik*

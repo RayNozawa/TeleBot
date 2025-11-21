@@ -1,4 +1,3 @@
-import fs from 'fs'
 import axios from 'axios'
 
 let timeout = 120000
@@ -20,8 +19,9 @@ export const run = {
     conn.game = conn.game ? conn.game: {}
     let id = 'tebakgambar-' + m.chat
     if (id in conn.game) return conn.reply(m.chat, 'Masih ada soal belum terjawab di chat ini', conn.game[id][0])
-    let src = (await axios.get("https://raw.githubusercontent.com/BochilTeam/database/master/games/tebakgambar.json")).data
-    let json = src[Math.floor(Math.random() * src.length)]
+
+    let { data: json } = await axios.get(`${apiUrl}/tebakgambar`)
+    
     let caption = `
 🕑Timeout *${(timeout / 1000).toFixed(2)} detik*
 

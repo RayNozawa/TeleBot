@@ -18,9 +18,8 @@ export const run = {
     let id = m.chat
     if (id in conn.tebakkimia) return conn.reply(m.chat, 'Masih ada soal belum terjawab di chat ini', conn.tebakkimia[id][0])
 
-    const { data: src } = await axios.get("https://raw.githubusercontent.com/BochilTeam/database/master/games/tebakkimia.json")
-    const json = src[Math.floor(Math.random() * src.length)]
-        
+    let { data: json } = await axios.get(`${apiUrl}/tebakkimia`)
+
   let caption = `*${command.toUpperCase()}*\nLambang: *${json.unsur}*
 
 Timeout *${(timeout / 1000).toFixed(2)} detik*

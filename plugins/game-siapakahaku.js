@@ -17,9 +17,9 @@ export const run = {
     conn.siapakahaku = conn.siapakahaku ? conn.siapakahaku : {}
     let id = m.chat
     if (id in conn.siapakahaku) return conn.reply(m.chat, '❗Masih ada soal belum terjawab di chat ini', conn.siapakahaku[id][0])
-    let { data: src } = await axios.get("https://raw.githubusercontent.com/BochilTeam/database/master/games/siapakahaku.json")
-    const json = src[Math.floor(Math.random() * src.length)]
-        
+
+    let { data: json } = await axios.get(`${apiUrl}/siapakahaku`)
+    
     let caption = `
 ❓Siapakah aku? ${json.soal}
 

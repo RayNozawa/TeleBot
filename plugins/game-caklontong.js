@@ -19,9 +19,8 @@ export const run = {
     let id = m.chat
     if (id in conn.caklontong) return conn.reply(m.chat, '❗Masih ada soal belum terjawab di chat ini', conn.caklontong[id][0])
     
-    const { data: src } = await axios.get("https://raw.githubusercontent.com/BochilTeam/database/master/games/caklontong.json")
-    const json = src[Math.floor(Math.random() * src.length)]
-        
+    const { data: json } = await axios.get(`${apiUrl}/caklontong`)
+
     let caption = `
 📄${json.soal}
 🕑Timeout *${(timeout / 1000).toFixed(2)} detik*

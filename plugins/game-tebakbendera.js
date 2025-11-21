@@ -20,8 +20,7 @@ export const run = {
     let id = m.chat
     if (id in conn.tebakbendera) return conn.reply(m.chat, 'Masih ada soal belum terjawab di chat ini', conn.tebakbendera[id][0])
 
-    let { data: src } = await axios.get('https://raw.githubusercontent.com/BochilTeam/database/master/games/tebakbendera2.json')
-    let json = src[Math.floor(Math.random() * src.length)]
+    let { data: json } = await axios.get(`${apiUrl}/tebakbendera`)
 
     let caption = `*${command.toUpperCase()}*
 Timeout *${(timeout / 1000).toFixed(2)} detik*
