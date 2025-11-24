@@ -51,8 +51,9 @@ export const run = {
       for (let name in cmd) {
         let obj = cmd[name].run;
         if (!obj || !obj.category) continue;
-        if (!category[obj.category]) category[obj.category] = [];
-        category[obj.category].push(obj);
+        let key = obj.category.toLowerCase();
+        if (!category[key]) category[key] = [];
+        category[key].push(obj);
       }
 
       const me = await conn.getMe();
