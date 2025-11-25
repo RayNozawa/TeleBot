@@ -181,8 +181,8 @@ export const run = {
 
     
 async function jkt48Sound() {
-  let { data: json } = await axios.get(`${apiUrl}/tebaklagujkt48`)
-  return json
+  let { data } = await axios.get(`${apiUrl}/randomlagujkt48?type=json`)
+  return data
 }
 
 function clockString(ms) {
