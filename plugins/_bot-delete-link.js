@@ -2,8 +2,8 @@ const isLinkOnly = /https?:\/\/[^\s]+/i;
 
 export const run = {
    async: async (m, { conn, Api, body, Func, users, env, isROwner, groupSet, isAdmin }) => {   
-     if ((await isAdmin(m.sender))) return
      if (!groupSet?.antilink) return
+     if ((await isAdmin(m.sender))) return
      
      const isAntiLink = isLinkOnly.exec(m.text)
 
