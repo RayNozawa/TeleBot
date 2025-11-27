@@ -2,12 +2,17 @@ const isLinkOnly = /https?:\/\/[^\s]+/i;
 
 export const run = {
    async: async (m, { conn, Api, body, Func, users, env, isROwner, groupSet, isAdmin }) => {   
-     if (!m.isGroup || isAdmin(m.sender)) return false;
-
+     if ((await isAdmin(m.sender))) return
+     if (!groupSet?.antilink) return
+     
      const isAntiLink = isLinkOnly.exec(m.text)
 
-     if (groupSet?.antilink && isAntiLink) {
-       return conn.deleteMessage(m.chat, m.id)
+     if (isAntiLink) {
+       try {
+         await conn.deleteMessage(m.chat, m.id)
+       } catch (e) {
+         m.reply(`Link terdeteksi, tetapi gagal menghapus: ${e.message}`)
+       }
      }
    },
    error: false,
