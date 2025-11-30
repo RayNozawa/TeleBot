@@ -9,6 +9,7 @@
 - ***Backup database & bot token otomatis terkirim ke owner***
 - ***Enkripsi standar main.js & handler.js***
 - ***Beli key hubungi [@RayhanXD](https://t.me/RayhanXD)***
+- **Trial Key:** ```jiwarudays```
 
 ## ✨ Fitur Utama
 
