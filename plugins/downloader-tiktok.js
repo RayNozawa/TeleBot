@@ -1,5 +1,4 @@
 import axios from "axios";
-import fetch from "node-fetch";
 import { format } from "util";
 
 export const run = {
@@ -15,35 +14,37 @@ export const run = {
       users,
       env
    }) => {	
-	const urg = text ? text : m.quoted?.text ? m.quoted.text : text
-	if (!urg) return m.reply(`*❗Masukkan Url, Contoh:*\n\n${isPrefix + command} https://vm.tiktok.com/ZSjFAS5mf/`)
-	if (!urg.match(/https/gi)) return m.reply(`⚠️ Masukkan url tiktok`)
-	if (!urg.match(/tiktok/gi)) return m.reply(`❎ Link yang anda masukkan bukan berasal dari tiktok`)
+	const input = text ? text : m.quoted?.text ? m.quoted.text : text
+	if (!input) return m.reply(`*❗Masukkan Url, Contoh:*\n\n${isPrefix + command} https://vm.tiktok.com/ZSjFAS5mf/`)
+	if (!input.match(/https/gi)) return m.reply(`⚠️ Masukkan url tiktok`)
+	if (!input.match(/tiktok/gi)) return m.reply(`❎ Link yang anda masukkan bukan berasal dari tiktok`)
       
 	const urlRegex = /(https?:\/\/[^\s`]+)/g;
-	const match = urg.match(urlRegex);
+	const match = input.match(urlRegex);
 	const url = match[0];
 
 	conn.sendChatAction(m.chat, "upload_video")
 	try {
-		let result = await Tiktokdl(url);
-		if (result.data?.images) {
-			let date = konversiTimestamp(result.data.create_time)
+		let { data: result } = await axios.get(`${apiUrl}/tiktok?url=${url}`);
+		if (result?.images) {
+			let date = konversiTimestamp(result.create_time)
 			
 			let tx = `[ DOWNLOADER IMAGE TIKTOK ]\n\n` +
-			` ᪣ Author Name : ${result.data.author.nickname}\n` +
-			` ᪣ Jumlah Foto : ${result.data.images.length}\n` +
-			` ᪣ Jumlah Views : ${result.data.play_count}\n` +
-			` ᪣ Jumlah Share : ${result.data.share_count}\n` +
-			` ᪣ Jumlah Comment : ${result.data.comment_count}\n` +
+			` ᪣ Author Name : ${result.author.nickname}\n` +
+			` ᪣ Jumlah Foto : ${result.images.length}\n` +
+			` ᪣ Jumlah Views : ${result.play_count}\n` +
+			` ᪣ Jumlah Share : ${result.share_count}\n` +
+			` ᪣ Jumlah Comment : ${result.comment_count}\n` +
 			` ᪣ Diupload Pada : ${date.split("pukul")[0]}\n` +
-			` ᪣ Description : ${result.data.title}\n\n` + env.wm
+			` ᪣ Description : ${result.title}\n\n` + env.wm
 		
 			const media = [];
-			media.push({
-			    type: 'image',
+			result.images.splice(0, 10).map((urls) => {
+			  media.push({
+			    type: 'photo',
 			    media: urls,
 			    caption: tx
+			  })
 			})
 			
 			if (media.length > 1) {
@@ -53,20 +54,20 @@ export const run = {
 			    await conn.sendButton(m.chat, donateBtn, media[0].media, 'tiktok.jpg', tx.trim(), m.msg, env.wm, null);
 			}
 		} else {
-			let date = konversiTimestamp(result.data.create_time) ||
+			let date = konversiTimestamp(result.create_time) ||
 			"Unknown";
 			
 			let tx = `[ DOWNLOADER VIDEO TIKTOK ]\n\n` +
-			` ᪣ Author Name : ${result.data.author.nickname}\n` +
-			` ᪣ Durasi Video : ${result.data.duration}\n` +
-			` ᪣ Jumlah Views : ${result.data.play_count}\n` +
-			` ᪣ Jumlah Share : ${result.data.share_count}\n` +
-			` ᪣ Jumlah Comment : ${result.data.comment_count}\n` +
+			` ᪣ Author Name : ${result.author.nickname}\n` +
+			` ᪣ Durasi Video : ${result.duration}\n` +
+			` ᪣ Jumlah Views : ${result.play_count}\n` +
+			` ᪣ Jumlah Share : ${result.share_count}\n` +
+			` ᪣ Jumlah Comment : ${result.comment_count}\n` +
 			` ᪣ Diupload Pada : ${date.split("pukul")[0]}\n` +
-			` ᪣ Description : ${result.data.title}\n\n` + env.wm
-			await conn.sendButton(m.chat, donateBtn, result.buffer, 'tiktok.mp4', tx.trim(), m.msg, env.wm, null);
+			` ᪣ Description : ${result.title}\n\n` + env.wm
+			await conn.sendButton(m.chat, donateBtn, result.play, 'tiktok.mp4', tx.trim(), m.msg, env.wm, null);
 		}
-		await conn.sendButton(m.chat, donateBtn, result.data.music_info.play, 'TikTok Audio.mp3', '', m.msg, result.data.author.nickname);
+		await conn.sendButton(m.chat, donateBtn, result.music_info.play, 'TikTok Audio.mp3', '', m.msg, result.author.nickname);
       } catch (e) {
         m.reply(e.message)
       }
@@ -76,37 +77,6 @@ export const run = {
    cache: true,
    location: __filename
 }
-
-async function Tiktokdl(link) {
-	try {
-		let request = "https://tikwm.com/api/";
-		let reqData = {
-			url: link
-		};
-		let reqHeaders = {
-			"Content-Type": "application/x-www-form-urlencoded",
-			Accept: "application/json, text/javascript",
-			"X-Requested-With": "XMLHttpRequest"
-		};
-		let response = await axios.post(request, reqData, {
-			headers: reqHeaders
-		});
-		let result = await response?.data?.data
-		
-		let buffer = await (await fetch(result.play)).buffer();
-
-		return {
-			status: true,
-			data: result,
-			buffer: buffer
-		};
-	} catch (x) {
-		return {
-			status: false,
-			msgError: String(x)
-		}
-	}
-};
 
 function konversiTimestamp(timestamp) {
     var tanggalWaktu = new Date(timestamp * 1000);
