@@ -6,7 +6,6 @@
 
 ### Script ini berbayar (5K PerBulan, 25K Permanen)
 - ***Auto update file/plugins selama script dijalankan!***
-- ***Boleh Request Fitur (No 18+)***
 - ***Backup script otomatis terkirim ke owner, file/folder yang kamu ubah tidak akan hilang***
 - ***Enkripsi standar main.js & handler.js***
 - ***Beli key hubungi [@RayhanXD](https://t.me/RayhanXD)***
