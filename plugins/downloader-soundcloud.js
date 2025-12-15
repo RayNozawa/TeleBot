@@ -26,13 +26,13 @@ export const run = {
   conn.sendChatAction(m.chat, 'record_audio')
   
   if (!url || url.indexOf("https") === -1) {
-    const { data } = await axios.get(`https://api.siputzx.my.id/api/s/soundcloud?query=${text}`)
-    url = data.data[0].permalink_url
+    const { data } = await axios.get(`${apiUrl}/search/soundcloud?query=${text}`)
+    url = data[0].permalink_url
   }
 
   try {
-    let { data } = await axios.get(`https://api.siputzx.my.id/api/d/soundcloud?url=${url}`)
-    await conn.sendButton(m.chat, donateBtn, data.data.url, data.data.title+'.mp3', '', m.msg, env.wm);
+    const { data } = await axios.get(`${apiUrl}/download/soundcloud?url=${url}`)
+    await conn.sendButton(m.chat, donateBtn, data.url, data.data.title+'.mp3', '', m.msg, env.wm);
   } catch (e) {
     return m.reply('Terjadi kesalahan: ' + e.message)
   }
