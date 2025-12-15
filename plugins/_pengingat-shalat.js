@@ -4,7 +4,6 @@ export const run = {
     conn.autosholat = conn.autosholat || {};
     let id = m.chat;
 
-    // Jadwal Sholat berdasarkan wilayah
     let jadwalSholat = {
         Jakarta: {
             Fajar: "04:49",
@@ -28,17 +27,14 @@ export const run = {
         }
     };
 
-    // Mendapatkan waktu saat ini sesuai zona waktu
     const timeZone = "Asia/Jakarta"; // Bisa diubah jika ada perbedaan zona waktu
     const date = new Date(new Date().toLocaleString("en-US", { timeZone }));
     const hours = date.getHours();
     const minutes = date.getMinutes();
     const timeNow = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
 
-    // Cek apakah pesan sudah dikirim sebelumnya
     if (conn.autosholat[id] === timeNow) return false; 
 
-    // Menentukan wilayah berdasarkan waktu yang cocok
     let wilayahTerpilih = null;
     let sholatTerpilih = null;
 
@@ -53,15 +49,12 @@ export const run = {
         if (wilayahTerpilih) break;
     }
 
-    // Jika ada waktu sholat yang cocok, kirim pesan
     if (wilayahTerpilih && sholatTerpilih) {
         let caption = `Hei ${await getName(m.sender, conn)}!,\nWaktu *${sholatTerpilih}* telah tiba, ambilah air wudhu dan segeralah shalat.\n\n*${timeNow}*\n_untuk wilayah ${wilayahTerpilih} dan sekitarnya._`;
         m.reply(caption)
 
-        // Simpan waktu terakhir pesan dikirim
         conn.autosholat[id] = timeNow;
 
-        // Hapus status setelah 120 detik agar bisa mengirim lagi saat waktu berbeda
         setTimeout(() => {
             delete conn.autosholat[id];
         }, 120000);

@@ -23,7 +23,7 @@ export const run = {
      const { message_id } = await m.reply("🤔");
      
      try {
-       let { data } = await axios.get(`https://smail.my.id/simi?text=${m.text}&lang=id&filter=false`)
+       let { data } = await axios.get(`${apiUrl}/simi?text=${m.text}&lang=id&filter=false`)
        await conn.editMsg(m.chat, message_id, data.response, button, "Markdown")
      } catch (e) {
        m.reply(e.message);
