@@ -5,6 +5,7 @@
   "OWNER_ID": 5600234846,
   "database": "database",
   "bot_token": "Isi_Token_Bot_Utama",
+  "group": "https://t.me/bot_nozawa",
   "evaluate_chars": ["=>", "~>", "<", ">", "$"],
   "setting": {
     "multiprefix": true,
