@@ -9,7 +9,7 @@
 - ***Backup script otomatis terkirim ke owner, file/folder yang kamu ubah tidak akan hilang***
 - ***Enkripsi standar main.js & handler.js***
 - ***Beli key hubungi [@RayhanXD](https://t.me/RayhanXD)***
-- **Trial Key:** ```shani5```
+- **Trial Key:** ```firstsnow```
 
 ## ✨ Fitur Utama
 
