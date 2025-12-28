@@ -18,7 +18,7 @@ export const run = {
       env
    }) => {
      try {
-       const VER_TOKEN = "isaBYsc2xQLvr26tLDFeZwbv";
+       const VER_TOKEN = "qFrfA95AWJ2gNaDjaLpY4zDM";
        
        const reply = m.quoted?.msg;
        
