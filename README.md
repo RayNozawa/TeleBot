@@ -4,7 +4,7 @@
 
 ---
 
-### Script ini berbayar (5K PerBulan, 25K 100% No Encrypt)
+### Script ini berbayar (5K PerBulan, 25K Permanen 100% No Encrypt)
 - ***Auto update file/plugins selama script dijalankan!***
 - ***Backup script otomatis terkirim ke owner, file/folder yang kamu ubah tidak akan hilang***
 - ***Enkripsi standar main.js & handler.js***
