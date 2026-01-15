@@ -21,7 +21,7 @@ export const run = {
      
      conn.sendChatAction(m.chat, 'upload_photo')
      try {
-       const url = await conn.getFileLink(q.msg.photo[q.msg.photo.length - 1].file_id);
+       const link = await conn.getFileLink(q.msg.photo[q.msg.photo.length - 1].file_id);
        await conn.sendPhoto(m.chat, `${apiUrl}/tofigure?url=${link}`, { caption: "Successfully!", reply_to_message_id: m.msg.message_id });
      } catch (error) {
        return m.reply(`Terjadi kesalahan: ${error.message}`);
